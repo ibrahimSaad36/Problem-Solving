@@ -1,28 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void mergeTwoArrays(int arr1[], int n1, int arr2[], int n2, int arr3[])
+void mergeTwoArrays(int arr1[], int n1, int arr2[], int n2, int mergedArr[]) 
 {
-    int i, j, k;
-    for(i = 0, j = 0, k = 0; i < (n1 + n2); i++, j++)
+    int i = 0, j = 0, k = 0;
+    while (i < n1 && j < n2) 
     {
-        if(i < n1)
+        if (arr1[i] <= arr2[j]) 
         {
-            if (arr1[i] <= arr2[j]) 
-            {
-                arr3[k] = arr1[i];
-            } 
-            else 
-            {
-                arr3[k] = arr2[j];
-            }
-            k++;
-        }
-        else
+            mergedArr[k] = arr1[i];
+            i++;
+        } 
+        else 
         {
-            arr3[k] = arr2[j];
-            k++;
+            mergedArr[k] = arr2[j];
+            j++;
         }
+        k++;
+    }
+    while (i < n1) 
+    {
+        mergedArr[k] = arr1[i];
+        i++;
+        k++;
+    }
+    while (j < n2) 
+    {
+        mergedArr[k] = arr2[j];
+        j++;
+        k++;
     }
 }
 
@@ -33,7 +39,7 @@ int main(void)
 
     int* mergedArr = (int*) malloc((6 + 3) * sizeof(int));
 
-    mergeArrays(arr1, 6, arr2, 3, mergedArr);
+    mergeTwoArrays(arr1, 6, arr2, 3, mergedArr);
 
     for (int i = 0; i < 6 + 3; i++) 
     {
